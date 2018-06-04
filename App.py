@@ -32,26 +32,48 @@ w.place(x=210,y=20)
 
 
 def ok():
-    value = variable_month.get() + ' ' + variable_day.get() + ', ' + variable_year.get()
-    label_1 = Label(top, text = value)
-    label_1.place(x=100,y=80)
-    value = ''
-    ok_button['state']='disabled'
-    confirm_date_button['state']='normal'
-    change_date_button['state']='normal'
 
+
+    validDate = True
+    
+ 
+    if(int(variable_year.get()) % 4 == 0 and (int(variable_year.get()) % 100 != 0 or int(variable_year.get()) % 400 == 0)): #Fancy math to check wether it's a leap year.
+        leapYear = True
+    else:
+        leapYear = False
+    if(leapYear == True and variable_month.get() ==  "Feb" and int(variable_day.get()) >= 30):
+            validDate = False
+    elif(leapYear == False and variable_month.get() == "Feb" and int(variable_day.get()) >= 29):
+        validDate = False
+    if(validDate == True): 
+        print ("Date is valid")
+        value = variable_month.get() + ' ' + variable_day.get() + ', ' + variable_year.get()
+        label_1 = Label(top, text = value)
+        label_1.place(x=100,y=80)    
+        value = ''
+        ok_button['state']='disabled'
+        confirm_date_button['state']='normal'
+        change_date_button['state']='normal'
+        
+        
+    else:
+        print ("Date is invalid") 
+        label_1 = Label(top, text = "Error")
+        
+        
 ok_button = Button(top, text="OK", command = ok)
-
+        
 ok_button.place(x=100,y=50)
 
 def confirm_date():
+    validDate = True
     label_confirm = Label(top, text = 'Confirmed')
     label_confirm.place(x=100,y=130)
 
 confirm_date_button = Button(top, text="Continue With This Date", command = confirm_date)
-
 confirm_date_button.place(x=100,y=100)
-confirm_date_button['state']='disabled'
+
+
 
 def change_date():
     ok_button['state']='normal'
