@@ -3,6 +3,7 @@ top = Tk()
 #Size of the window
 top.geometry("500x600")
 
+top.title('Calendar')
 #Drop Down Menu
 months = ['Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'] #etc
 
